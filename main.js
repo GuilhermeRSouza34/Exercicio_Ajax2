@@ -19,5 +19,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
             followersElement.innerText = json.followers;
             reposElement.innerText = json.public_repos;
             linkElement.href = json.html_url;
-        })
+
+            // Agora vamos obter os dados dos seguidores e pessoas que você segue
+            fetch(json.followers_url)
+                .then(res => res.json())
+                .then(followers => {
+                    followersElement.innerText = followers.length;
+                });
+
+            fetch(json.following_url.replace('{/other_user}', ''))
+                .then(res => res.json())
+                .then(following => {
+                    followingElement.innerText = following.length;
+                });
+        });
 });
