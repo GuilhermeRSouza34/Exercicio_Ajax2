@@ -18,19 +18,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
             followingElement.innerText = json.following;
             followersElement.innerText = json.followers;
             reposElement.innerText = json.public_repos;
-            linkElement.href = json.html_url;
+            linkElement.href = 'https://github.com/GuilhermeRSouza34';
 
             // Agora vamos obter os dados dos seguidores e pessoas que você segue
-            fetch(json.followers_url)
+            fetch('https://api.github.com/users/GuilhermeRSouza34/followers')
                 .then(res => res.json())
                 .then(followers => {
                     followersElement.innerText = followers.length;
                 });
 
-            fetch(json.following_url.replace('{/other_user}', ''))
+            fetch('https://api.github.com/users/GuilhermeRSouza34/following')
                 .then(res => res.json())
                 .then(following => {
                     followingElement.innerText = following.length;
                 });
+        })
+        .catch(function(error) {
+            console.log('Ocorreu um erro:', error);
         });
 });
