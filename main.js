@@ -6,4 +6,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
     const followersElement = document.querySelector('#followers');
     const followingElement = document.querySelector('#following');
     const linkElement = document.querySelector('#link');
+
+    fetch('https://github.com/GuilhermeRSouza34')
+        .then(function (res) {
+            return res.json();
+        })
 });
